@@ -1,0 +1,39 @@
+.wr{
+    overflow-x: auto;
+    display: flex;
+
+    flex-direction: column;
+    position: absolute;
+top: 0;
+width: 80%;
+}
+.item{
+    border-radius: 0px 0px 10px 10px;
+    border: 2px solid #fff;
+    padding: .3em 1em;
+    display: flex;
+    align-items: center;
+    cursor:pointer;
+    &.active{
+        filter:brightness(.2)
+    }
+}
+.itemParent{
+    background-color: red;
+}
+.itemChild{
+    background-color: rgb(1, 218, 229);
+    padding: .3em 1em;
+    display: flex;
+    cursor:pointer;
+    &.active{
+        filter:brightness(.1)
+    }
+}
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bookmarkPlank{
+    display: inline-flex;}

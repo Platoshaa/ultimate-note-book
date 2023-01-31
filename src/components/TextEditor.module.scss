@@ -1,0 +1,24 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+.wr{
+    height: 100%;
+    padding: 3vw 0;
+}
+.form{
+    background-color: transparent;
+border:none;
+width: 100%;
+}
+.input{
+    margin-left: 2em;
+    font-size: 25px;
+}
+.textarea{
+    height: 90%;
+    font-size: 20px;
+    resize: none;
+}

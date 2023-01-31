@@ -1,0 +1,36 @@
+.timer-btn{
+    border:none;
+    font-size: .7em;
+    padding: .6em .8em;
+    color: #fff;
+    border-radius: 3px;
+}
+.time-wr{
+    position: fixed;
+    max-width: 600px;
+    z-index: 30;
+    margin-top: 180px;
+    width: 80%;
+}
+.stopwatch{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: .5em;
+}
+.stopwatch-card{
+    flex: 1 1  auto;
+    align-items: center;
+    display: flex;
+    gap: 20px;
+}
+.stpw{
+    margin-bottom: 1em;
+    max-height: 300px;
+    overflow: scroll;
+}
+@media  (max-width:600px){
+    .timer-buttons{
+    display: flex;flex-direction: column;
+    }   
+}
