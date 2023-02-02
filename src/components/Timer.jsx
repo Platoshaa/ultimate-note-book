@@ -6,6 +6,7 @@ import {
   asyncGetTimerCounter,
   asyncGetTimerList,
   asyncUpdateTimer,
+  setCounter,
 } from "../redux/slices/timerSlice";
 import "./Timer.css";
 import ItemTimer from "./ItemTimer";
@@ -19,12 +20,14 @@ const Timer = ({ style }) => {
   const [currentTimer, setCurrentTimer] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const myWorker = useRef();
+  const timerCounter = useSelector((s) => s.timer.counter);
+
   useEffect(() => {
     if (refId.current) {
       if (isActive) {
-        myWorker.current.postMessage([currentTimer, "start"]);
+        myWorker.current.postMessage([currentTimer, timerCounter[0], "start"]);
       } else {
-        myWorker.current.postMessage([currentTimer, "stop"]);
+        myWorker.current.postMessage([currentTimer, timerCounter[0], "stop"]);
       }
     }
   }, [isActive]);
@@ -33,80 +36,87 @@ const Timer = ({ style }) => {
     myWorker.current = new window.Worker("./cw.js");
     myWorker.current.addEventListener("message", (event) => {
       if (refId.current) {
-        if (event.data[1]) {
+        if (event.data[2]) {
           setCurrentTimer(event.data[0]);
+          d(setCounter([event.data[1], new Date().getDate()]));
         } else {
           d(asyncUpdateTimer(t, refId.current, event.data[0]));
+          d(asyncAddTimerCounter(t, [event.data[1], new Date().getDate()]));
           new Audio(audio).play();
         }
       }
     });
-    // d(asyncGetTimerCounter(t));
+    d(asyncGetTimerCounter(t));
   }, []);
-
+  useEffect(() => {
+    if (timerCounter[1]) {
+      if (new Date().getDate() == timerCounter[1]) {
+      } else {
+        d(asyncAddTimerCounter(t, [0, new Date().getDate()]));
+      }
+    }
+  }, [timerCounter]);
   const addTimer = () => {
     d(asyncAddTimer(t, title));
     setTitle("");
   };
   const [title, setTitle] = useState("");
+  const [isOpened, setIsOpened] = useState(true);
   return (
     <div style={style} className="time-wr">
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <h2 style={{ marginBottom: ".3em" }}>Skillometr</h2>
-        {/* <div>{timerCounter[0]}/20</div> */}
-      </div>
-
-      <div className="stpw">
-        {timerList.map((e) => (
-          <ItemTimer
-            currentTimer={currentTimer}
-            refId={refId}
-            setCurrentTimer={setCurrentTimer}
-            token={t}
-            isActive={isActive}
-            setIsActive={setIsActive}
-            item={e}
-            key={e.id}
-          ></ItemTimer>
-        ))}
-      </div>
-      <div style={{ display: "flex" }}>
-        <input
-          placeholder="Название таймера"
-          type="text"
-          style={{
-            width: "100%",
-            backgroundColor: "transparent",
-            flex: "1 1 auto",
-          }}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <button
-          style={{ backgroundColor: "darkcyan", color: "#fff" }}
-          className="timer-btn"
-          onClick={addTimer}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <h2
+          onClick={() => setIsOpened((s) => !s)}
+          style={{ marginBottom: ".3em" }}
         >
-          add new
-        </button>
+          Skillometr
+        </h2>
+        <div>Сегодня: {Math.floor(timerCounter[0] / 60)} мин</div>
+      </div>
+      <div className={isOpened ? "stpw-body active" : "stpw-body"}>
+        <div className="stpw">
+          {timerList.map((e) => (
+            <ItemTimer
+              currentTimer={currentTimer}
+              refId={refId}
+              setCurrentTimer={setCurrentTimer}
+              token={t}
+              isActive={isActive}
+              setIsActive={setIsActive}
+              item={e}
+              key={e.id}
+            ></ItemTimer>
+          ))}
+        </div>
+        <div style={{ display: "flex" }}>
+          <input
+            placeholder="Название таймера"
+            type="text"
+            style={{
+              width: "100%",
+              backgroundColor: "transparent",
+              flex: "1 1 auto",
+            }}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <button
+            style={{ backgroundColor: "darkcyan", color: "#fff" }}
+            className="timer-btn"
+            onClick={addTimer}
+          >
+            add new
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Timer;
-// const timerCounter = useSelector((s) => s.timer.counter);
-// useEffect(() => {
-//   if (timerCounter[1]) {
-//     if (new Date().getDate() == timerCounter[1]) {
-//     } else {
-//       d(asyncAddTimerCounter(t, [0, new Date().getDate()]));
-//     }
-//   }
-// }, [timerCounter[0]]);
-// useEffect(() => {
-//   if (isFinished) {
-//     d(asyncAddTimerCounter(t, [1 + timerCounter[0], new Date().getDate()]));
-//     setIsFinished(false);
-//   }
-// }, [isFinished]);

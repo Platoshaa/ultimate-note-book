@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { timerAPI } from "../../api";
 const initialState = {
   list: [],
-  counter: [],
+  counter: [0, null],
 };
 const dataSlice = createSlice({
   name: "skillometr",
