@@ -29,6 +29,12 @@
     max-height: 300px;
     overflow: scroll;
 }
+.stpw-body{
+    display: none;
+}
+.stpw-body.active{
+    display: block;
+}
 @media  (max-width:600px){
     .timer-buttons{
     display: flex;flex-direction: column;

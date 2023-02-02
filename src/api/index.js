@@ -119,7 +119,6 @@ export const authAPI = {
 export const timerAPI = {
   async getCounter(userToken) {
     const querySnapshot = await getDoc(doc(db, "users", userToken));
-
     return querySnapshot.data();
   },
   async addCounter(userToken, counter) {

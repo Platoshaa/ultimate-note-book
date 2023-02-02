@@ -49,7 +49,6 @@ const TextEditor = () => {
   }, [name, body]);
   return (
     <div className={cl.wr}>
-      <div>TimerVidget</div>
       <header className={cl.header}>
         <Link to="/">
           <BsArrowLeftShort></BsArrowLeftShort>
