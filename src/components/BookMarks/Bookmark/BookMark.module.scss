@@ -1,0 +1,14 @@
+
+.btn{
+    font-size: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.106);
+    border:none;
+    padding: .2em;
+    margin-left: .3em;
+    &:hover{
+        cursor:pointer;
+        filter:brightness(.2)    }
+}

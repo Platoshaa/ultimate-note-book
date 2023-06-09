@@ -1,0 +1,42 @@
+@import "~rfs/scss";
+
+.wr{
+    overflow-x: scroll;
+    display: flex;
+width: 100%;
+    flex-direction: column;
+   
+    position: relative;
+    z-index: 2;
+flex: 0 0 auto}
+.item{
+    border-radius: 0px 0px 10px 10px;
+    border: 2px solid #fff;
+    @include padding( .5rem 1rem);
+    display: flex;
+    height: 100%;
+    align-items: center;
+    cursor:pointer;
+    &.active{
+        filter:brightness(.7)
+    }
+}
+.itemParent{
+    background-color: #ce93d8;
+}
+.itemChild{
+    background-color: #e57373;
+    display: flex;
+    cursor:pointer;
+    &.active{
+        filter:brightness(.7)
+    }
+}
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bookmarkPlank{
+    display: flex;
+}
