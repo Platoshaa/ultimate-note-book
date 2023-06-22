@@ -17,7 +17,6 @@ const ListArticle = ({ data, deleteArticle }) => {
   const clickItem = (id) => {
     n(`/pages/${id}`);
   };
-  console.log(data);
   return (
     <List sx={{ overflowY: "auto", paddingBottom: "5em", height: 400 }}>
       {data.length

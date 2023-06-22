@@ -70,7 +70,10 @@ const TextEditor = () => {
           <FavoriteIcon />
         </Btn>
       </header>
-
+      {/* <div id="mytxt" contenteditable="true">
+        Hello, my name is <span style={{ color: "red" }}>Bob</span>
+        and I have a friend name <span style={{ color: "green" }}>Joe</span>.
+      </div> */}
       <textarea
         value={article.body}
         className={cl.textarea + " " + cl.form}

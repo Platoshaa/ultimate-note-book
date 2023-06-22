@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { articleAPI } from "../../api";
+import { removeActiveBookmark, setActiveBookmark } from "./bookmarkSlice";
 const initialState = {
   articles: [],
   favorite: [],
